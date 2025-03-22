@@ -164,9 +164,8 @@ interface Notification {
 
 const notifications = ref<Notification[]>([]);
 
-// ฟังก์ชันในการเชื่อมต่อ WebSocket
 const initWebSocket = () => {
-  const socketUrl = import.meta.env.VITE_SOCKET_URL; // หรือ process.env.VITE_SOCKET_URL
+  const socketUrl = import.meta.env.VITE_SOCKET_URL;
   const socket = io(socketUrl, {
     query: { userId: authStore.user._id },
   });
@@ -191,7 +190,7 @@ const initWebSocket = () => {
     socket.disconnect();
   });
 };
-// เชื่อมต่อ WebSocket เมื่อ component ถูก mount
+
 const unreadCount = ref(0);
 
 const fetchNotifications = async () => {
@@ -240,7 +239,6 @@ const onToggleNotification = async () => {
   if (unreadCount.value === 0) return
 
   if (isNotificationVisible.value) {
-    // เมื่อเปิด notification, ทำการ mark notification ทั้งหมดเป็น "อ่านแล้ว"
     await markNotificationAsRead(authStore.user._id);
     notifications.value.forEach((notification: any) => {
       notification.isRead = true;

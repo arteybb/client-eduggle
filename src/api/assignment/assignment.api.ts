@@ -2,7 +2,7 @@ import axios from '../user/instance/axios';
 import type { Assignment, Submission } from '@/types/assignment';
 import { getUserEnrollments } from '../user/course.api';
 
-// Get all assignments for a course
+
 export const getAssignmentsByCourse = async (courseId: string): Promise<Assignment[]> => {
   try {
     const { data } = await axios.get(`assignment/course/${courseId}`);
@@ -13,34 +13,34 @@ export const getAssignmentsByCourse = async (courseId: string): Promise<Assignme
   }
 };
 
-// Get all assignments for a user from all enrolled courses
+
 export const getUserAssignments = async (userId: string): Promise<Assignment[]> => {
   try {
-    // Get all courses the user is enrolled in
+
     const enrolledCourses = await getUserEnrollments(userId);
 
-    // Fetch assignments for each course
+
     const assignmentPromises = enrolledCourses.map(course =>
       getAssignmentsByCourse(course._id)
     );
 
-    // Wait for all promises to resolve
+
     const assignmentsArrays = await Promise.all(assignmentPromises);
 
-    // Flatten the array of arrays into a single array of assignments
+
     const allAssignments = assignmentsArrays.flat();
 
-    // Sort assignments by due date (if available) or creation date
+
     return allAssignments.sort((a, b) => {
-      // If both have due dates, compare them
+
       if (a.dueDate && b.dueDate) {
         return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
       }
-      // If only a has a due date, it comes first
+
       if (a.dueDate) return -1;
-      // If only b has a due date, it comes first
+
       if (b.dueDate) return 1;
-      // If neither has a due date, sort by creation date (newest first)
+
       return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     });
   } catch (error) {
@@ -49,7 +49,7 @@ export const getUserAssignments = async (userId: string): Promise<Assignment[]> 
   }
 };
 
-// Get assignment by ID
+
 export const getAssignmentById = async (assignmentId: string): Promise<Assignment> => {
   try {
     const { data } = await axios.get(`assignment/${assignmentId}`);
@@ -60,7 +60,7 @@ export const getAssignmentById = async (assignmentId: string): Promise<Assignmen
   }
 };
 
-// Create a new assignment
+
 export const createAssignment = async (formData: FormData): Promise<Assignment> => {
   try {
     const { data } = await axios.post('assignment', formData, {
@@ -75,7 +75,7 @@ export const createAssignment = async (formData: FormData): Promise<Assignment> 
   }
 };
 
-// Update an assignment
+
 export const updateAssignment = async (assignmentId: string, formData: FormData): Promise<Assignment> => {
   try {
     const { data } = await axios.patch(`assignment/${assignmentId}`, formData, {
@@ -90,7 +90,7 @@ export const updateAssignment = async (assignmentId: string, formData: FormData)
   }
 };
 
-// Delete an assignment
+
 export const deleteAssignment = async (assignmentId: string): Promise<void> => {
   try {
     await axios.delete(`assignment/${assignmentId}`);
@@ -100,7 +100,6 @@ export const deleteAssignment = async (assignmentId: string): Promise<void> => {
   }
 };
 
-// Submit an assignment (student)
 export const submitAssignment = async (assignmentId: string, formData: FormData): Promise<Submission> => {
   try {
     const { data } = await axios.post(`assignment/${assignmentId}/submit`, formData, {
@@ -115,7 +114,7 @@ export const submitAssignment = async (assignmentId: string, formData: FormData)
   }
 };
 
-// Get a student's submission for an assignment
+
 export const getStudentSubmission = async (assignmentId: string, userId: string): Promise<Submission | null> => {
   try {
     const { data } = await axios.get(`assignment/${assignmentId}/submissions/${userId}`);
@@ -129,7 +128,6 @@ export const getStudentSubmission = async (assignmentId: string, userId: string)
   }
 };
 
-// Grade a submission (teacher)
 export const gradeSubmission = async (
   assignmentId: string,
   userId: string,
