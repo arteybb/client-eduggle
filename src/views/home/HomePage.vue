@@ -182,29 +182,6 @@ interface Notification {
 
 const notifications = ref<Notification[]>([]);
 
-// ฟังก์ชันในการเชื่อมต่อ WebSocket
-const initWebSocket = () => {
-  const socket = io('http://localhost:3001', {
-    query: { userId: authStore.user._id },
-  });
-
-  socket.on('connect', () => {
-    console.log('Connected to WebSocket server');
-  });
-
-  socket.on('notifications', (newNotifications) => {
-    notifications.value = newNotifications;
-  });
-
-  socket.on('notification', (notification) => {
-    notifications.value.unshift(notification);
-  });
-
-  onBeforeUnmount(() => {
-    socket.disconnect();
-  });
-};
-// เชื่อมต่อ WebSocket เมื่อ component ถูก mount
 
 const fetchNotifications = async () => {
   const response = await getNotifications(authStore.user._id)
@@ -299,7 +276,6 @@ const hasSubmitted = (assignment: Assignment) => {
 };
 
 onMounted(async () => {
-  initWebSocket();
   await fetchNotifications()
   await loadEnrolledCourses();
   await loadUserAssignments();

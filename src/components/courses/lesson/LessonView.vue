@@ -37,6 +37,7 @@ import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
 import FetchingData from '@/components/FetchingData.vue';
+import { getLesson } from '@/api/lesson/lesson.api';
 
 interface Lesson {
   _id: string;
@@ -55,8 +56,8 @@ const error = ref<string | null>(null);
 
 const fetchLessons = async () => {
   try {
-    const response = await axios.get<Lesson[]>(`http://localhost:3000/api/lesson/course/${courseId}`);
-    lessons.value = response.data;
+    const response = await getLesson(courseId)
+    lessons.value = response;
 
     // ตั้งค่าบทเรียนแรกให้เป็นค่าเริ่มต้น (ถ้ามีข้อมูล)
     if (lessons.value.length > 0) {
@@ -74,5 +75,7 @@ const selectLesson = (lesson: Lesson) => {
   selectedLesson.value = lesson;
 };
 
-onMounted(fetchLessons);
+onMounted(async () => {
+  await fetchLessons()
+});
 </script>

@@ -166,7 +166,8 @@ const notifications = ref<Notification[]>([]);
 
 // ฟังก์ชันในการเชื่อมต่อ WebSocket
 const initWebSocket = () => {
-  const socket = io('http://localhost:3001', {
+  const socketUrl = import.meta.env.VITE_SOCKET_URL; // หรือ process.env.VITE_SOCKET_URL
+  const socket = io(socketUrl, {
     query: { userId: authStore.user._id },
   });
 
