@@ -24,7 +24,7 @@
           @click="openDiscussionDetails(discussion)">
           <div class="flex items-start">
             <el-avatar :size="40"
-              :src="`${$baseUrl}/uploads/${discussion.userPhotoURL}` || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'"
+              :src="`${baseUrl}/uploads/${discussion.userPhotoURL}` || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'"
               class="mr-3" />
             <div class="discussion-content flex-grow">
               <h5 class="font-medium text-lg">{{ discussion.title }}</h5>
@@ -107,6 +107,7 @@ const newDiscussionForm = ref({
   title: '',
   content: ''
 });
+const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 const selectedDiscussion = ref<Discussion | null>(null);
 
 const courseId = props.courseId;

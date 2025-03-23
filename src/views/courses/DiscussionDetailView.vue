@@ -38,7 +38,7 @@
         <div class="discussion-header bg-white p-6 rounded-lg shadow-sm mb-6">
           <div class="flex items-start">
             <el-avatar :size="50"
-              :src="`${$baseUrl}/uploads/${discussion.userPhotoURL}` || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'"
+              :src="`${baseUrl}/uploads/${discussion.userPhotoURL}` || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'"
               class="mr-4" />
             <div class="flex-grow">
               <h3 class="text-2xl font-semibold mb-2">{{ discussion.title }}</h3>
@@ -80,7 +80,7 @@
               class="comment-item p-4 border rounded-lg mb-3">
               <div class="flex items-start">
                 <el-avatar :size="40"
-                  :src="`${$baseUrl}/uploads/${comment.userPhotoURL}` || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'"
+                  :src="`${baseUrl}/uploads/${comment.userPhotoURL}` || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'"
                   class="mr-3" />
                 <div class="comment-content flex-grow">
                   <p class="text-gray-700">{{ comment.content }}</p>
@@ -147,6 +147,7 @@ const deleteConfirmationVisible = ref(false);
 const deleteConfirmationMessage = ref('');
 const itemToDelete = ref<{ type: 'discussion' | 'comment', id: string }>();
 const { mobileMode: isMobile } = useWindowSize()
+const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 // Format date for display
 const formatDate = (dateString: string): string => {
   try {

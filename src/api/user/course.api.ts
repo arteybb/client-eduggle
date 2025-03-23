@@ -1,5 +1,5 @@
 import axios from './instance/axios';
-import type { Course, Lesson, Quiz } from '@/types/course';
+import type { Course } from '@/types/course';
 
 export const getAllCourses = async (): Promise<Course[]> => {
   try {

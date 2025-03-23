@@ -139,7 +139,7 @@ export const deleteCourse = async (courseId: string): Promise<void> => {
 };
 
 // Create a new lesson
-export const createLesson = async (courseId: string, lessonData: { title: string; description?: string; courseId: string; content?: string }): Promise<Lesson> => {
+export const createLesson = async (courseId: string, lessonData: any): Promise<Lesson> => {
   try {
     console.log('Creating lesson with data:', lessonData);
     const { data } = await axios.post(`lesson/create`, lessonData);
@@ -152,7 +152,7 @@ export const createLesson = async (courseId: string, lessonData: { title: string
 };
 
 // Update an existing lesson
-export const updateLesson = async (courseId: string, lessonId: string, lessonData: { title?: string; description?: string; courseId?: string; content?: string }): Promise<Lesson> => {
+export const updateLesson = async (courseId: string, lessonId: string, lessonData: any): Promise<Lesson> => {
   try {
     console.log('Updating lesson:', lessonId, 'with data:', lessonData);
     console.log('Content included in update:', lessonData.content);

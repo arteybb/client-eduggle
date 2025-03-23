@@ -159,7 +159,7 @@ const fetchTeacherCourses = async () => {
 
 // Navigation functions
 const navigateToCreateCourse = () => {
-  router.push('/courses/create');
+  router.push('courses/create');
 };
 const navigateToCourse = (courseId: string) => {
   router.push(`../courses/${courseId}/lesson`);

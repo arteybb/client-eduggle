@@ -10,6 +10,7 @@ export interface Quiz {
   title: string;
   description?: string;
   courseId: string;
+  draft: boolean;
   questions: QuizQuestion[];
   timeLimit?: number;
   passingScore?: number;

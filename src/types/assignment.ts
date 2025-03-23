@@ -47,7 +47,7 @@ export interface AssignmentFormData {
   teacherName: string;
   teacherPhotoURL?: string;
   dueDate?: Date;
-  keepExistingAttachments?: string;
+  keepExistingAttachments?: boolean;
 }
 
 export interface SubmissionFormData {
@@ -55,5 +55,5 @@ export interface SubmissionFormData {
   displayName: string;
   userPhotoURL?: string;
   comment?: string;
-  keepExistingFiles?: string;
+  keepExistingFiles?: boolean;
 }

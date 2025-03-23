@@ -83,11 +83,10 @@ const router = useRouter();
 const courseId = route.params.courseId as string;
 const isEnrolled = ref(false);
 const enrollmentCount = ref(0);
-const enrollmentModalVisible = ref(false);
 const loadingDiscussions = ref(false);
 const discussions = ref<Discussion[]>([]);
-const courseDetail = ref(null);
-const courseInfo = ref(null);
+const courseDetail = ref(<any>null);
+const courseInfo = ref(<any>null);
 
 const updateCourseInfoPosition = () => {
   if (courseDetail.value && courseInfo.value) {

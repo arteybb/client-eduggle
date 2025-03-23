@@ -76,7 +76,7 @@
         <div class="mt-3 flex flex-wrap" v-if="assignment.attachments && assignment.attachments.length > 0">
           <div class="text-sm font-medium mr-2">Attachments:</div>
           <div v-for="(attachment, index) in assignment.attachments" :key="index" class="attachment-chip">
-            <a :href="`${$baseUrl}${attachment.fileUrl}`" target="_blank"
+            <a :href="`${baseUrl}${attachment.fileUrl}`" target="_blank"
               class="text-sm text-blue-600 hover:text-blue-800 flex items-center mr-2 mb-2">
               <i class="material-icons text-sm mr-1">attach_file</i>
               {{ truncateText(attachment.originalname, 20) }}
@@ -140,6 +140,7 @@ import FetchingData from '../FetchingData.vue';
 import { useRoute } from 'vue-router';
 import { useWindowSize } from '@/use/useWindowSize';
 const { mobileMode: isMobile } = useWindowSize()
+const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 // Define props
 const props = defineProps<{
   courseId: string;

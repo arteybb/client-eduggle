@@ -54,7 +54,7 @@ export const useAuthStore = defineStore("auth", () => {
       console.log(user.uid);
       const data = await register(payload);
       return data;
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error during sign-up:", error);
       throw new Error(error.message);
     }
@@ -86,9 +86,9 @@ export const useAuthStore = defineStore("auth", () => {
 
       router.push({ name: "home" });
       return data;
-    } catch (error) {
+    } catch (error: any) {
       console.error("Google Sign-In failed:", error);
-      throw new Error(error.message);
+      throw new Error(error?.message);
     }
   };
 

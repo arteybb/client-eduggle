@@ -8,7 +8,7 @@ export interface Course {
   imageName?: string;
   imageUrl?: string;
   teacherId: string;
-  lessons: string[] | Lesson[];
+  lessons: Lesson[];
   quizzes: string[] | Quiz[];
   isPublished?: boolean;
   price?: number;

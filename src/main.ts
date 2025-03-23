@@ -23,7 +23,8 @@ if (router.currentRoute.value.path !== '/') {
   authStore.initAuth();
 }
 
-app.config.globalProperties.$baseUrl = import.meta.env.VITE_APP_BASE_URL
+app.config.globalProperties.$apiBaseUrl = import.meta.env.VITE_APP_BASE_URL_API;
+app.config.globalProperties.$baseUrl = import.meta.env.VITE_APP_BASE_URL;
 
 app.use(router)
 

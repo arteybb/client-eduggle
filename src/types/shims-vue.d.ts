@@ -18,4 +18,7 @@ declare module '@/api/user/quiz.api' {
   export function submitQuizAttempt(attemptData: QuizSubmission): Promise<QuizAttempt>
   export function getUserQuizAttempts(userId: string): Promise<QuizAttempt[]>
   export function getQuizAttempts(quizId: string): Promise<QuizAttempt[]>
+  export function getIsPublicQuiz(quizId: string)
+  export function getQuizAttemptStatus(courseId: string, quizId: string)
+
 }

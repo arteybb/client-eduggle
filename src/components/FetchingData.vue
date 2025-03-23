@@ -6,20 +6,22 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 
 const dots = ref('');
-let interval = null;
+const interval = ref<ReturnType<typeof setInterval> | null>(null);
 
 onMounted(() => {
-  interval = setInterval(() => {
+  interval.value = setInterval(() => {
     dots.value = dots.value.length < 3 ? dots.value + '.' : '';
   }, 300);
 });
 
 onUnmounted(() => {
-  clearInterval(interval);
+  if (interval.value) {
+    clearInterval(interval.value);
+  }
 });
 </script>
 

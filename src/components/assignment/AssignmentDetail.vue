@@ -38,7 +38,7 @@
         <div class="text-sm font-medium mb-2">Attachments:</div>
         <div class="flex flex-wrap">
           <div v-for="(attachment, index) in assignment.attachments" :key="index" class="attachment-chip">
-            <a :href="`${$baseUrl}${attachment.fileUrl}`" target="_blank"
+            <a :href="`${baseUrl}${attachment.fileUrl}`" target="_blank"
               class="text-sm text-blue-600 hover:text-blue-800 flex items-center">
               <i class="material-icons text-sm mr-1">attach_file</i>
               {{ attachment.originalname }}
@@ -75,7 +75,7 @@
           <div class="flex flex-wrap">
             <div v-for="(file, index) in studentSubmission.files" :key="index"
               class="attachment-chip flex items-center">
-              <a :href="`${$baseUrl}${file.fileUrl}`" target="_blank"
+              <a :href="`${baseUrl}${file.fileUrl}`" target="_blank"
                 class="text-sm text-blue-600 hover:text-blue-800 flex items-center mr-2">
                 <i class="material-icons text-sm mr-1">attach_file</i>
                 {{ file.originalname }}
@@ -112,7 +112,7 @@
                 <div v-for="(file, index) in studentSubmission.files" :key="index"
                   class="attachment-chip flex items-center mb-2 mr-2"
                   :class="{ 'opacity-50 line-through': removedFileIndices.includes(index) }">
-                  <a :href="`${$baseUrl}${file.fileUrl}`" target="_blank"
+                  <a :href="`${baseUrl}${file.fileUrl}`" target="_blank"
                     class="text-sm text-blue-600 hover:text-blue-800 flex items-center mr-2">
                     <i class="material-icons text-sm mr-1">attach_file</i>
                     {{ file.originalname }}
@@ -262,7 +262,7 @@
             <div class="text-sm font-medium mb-2">Files:</div>
             <div class="flex flex-wrap">
               <div v-for="(file, index) in selectedSubmission.files" :key="index" class="attachment-chip">
-                <a :href="`${$baseUrl}${file.fileUrl}`" target="_blank"
+                <a :href="`${baseUrl}${file.fileUrl}`" target="_blank"
                   class="text-sm text-blue-600 hover:text-blue-800 flex items-center">
                   <i class="material-icons text-sm mr-1">attach_file</i>
                   {{ file.originalname }}
@@ -319,7 +319,7 @@ const emit = defineEmits<{
 }>();
 
 const { mobileMode: isMobile } = useWindowSize()
-
+const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 
 // Component state
 const studentSubmission = ref<Submission | null>(null);

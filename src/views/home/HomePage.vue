@@ -143,9 +143,11 @@
 
 
 <script setup lang="ts">
+import * as Vue from "vue";
+console.log(Vue);
 import MainLayout from '@/layouts/MainLayout.vue';
 import { useAuthStore } from '@/stores/auth';
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { getUserEnrollments } from '@/api/user/course.api';
 import { useNotificationStore } from '@/stores/notification';
 import { ElButton, ElBadge, ElEmpty } from 'element-plus';

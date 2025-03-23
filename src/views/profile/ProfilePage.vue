@@ -14,12 +14,13 @@
           <div class="flex flex-col md:flex-row items-center md:items-start">
             <div class="profile-avatar mb-6 md:mb-0 md:mr-8">
               <el-avatar :size="120"
-                :src="imageUrl || (authStore.user?.photoImg ? `${$baseUrl}/uploads/${authStore.user.photoImg}` : '')"
+                :src="imageUrl || (authStore.user && authStore.user.photoImg ? `${baseUrl}/uploads/${authStore.user.photoImg}` : '')"
                 class="mb-2">
                 <span v-if="!imageUrl && !authStore.user?.photoImg" class="text-2xl font-bold">
                   {{ authStore.user?.displayName?.charAt(0).toUpperCase() || 'U' }}
                 </span>
               </el-avatar>
+
 
               <el-upload class="avatar-uploader mt-2" action="#" :auto-upload="false" :show-file-list="false"
                 :on-change="handleFileChange">
@@ -78,7 +79,7 @@ import MainLayout from '@/layouts/MainLayout.vue';
 import { ElMessage, ElAvatar, ElButton, ElCard, ElDivider, ElForm, ElFormItem, ElInput, ElTag, ElUpload } from 'element-plus';
 import FetchingData from '@/components/FetchingData.vue';
 import type { UploadFile } from 'element-plus';
-
+const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 const authStore = useAuthStore();
 
 const formProfile = ref({
@@ -86,7 +87,7 @@ const formProfile = ref({
   photoImg: null as File | null
 });
 
-const imageUrl = ref<string | null>(null);
+const imageUrl = ref<any | null>(null);
 const isLoading = ref(true);
 const isSubmitting = ref(false);
 

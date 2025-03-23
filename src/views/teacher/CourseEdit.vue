@@ -84,7 +84,7 @@
 
                 <div v-else class="image-preview">
                   <img
-                    :src="course.imageUrl || (course.imageName ? `${$baseUrl}/uploads/images/${course.imageName}` : '')"
+                    :src="course.imageUrl || (course.imageName ? `${baseUrl}/uploads/images/${course.imageName}` : '')"
                     alt="Course image" class="w-full h-48 object-cover rounded-lg" />
                   <div class="image-actions mt-4 flex justify-center space-x-2">
                     <el-button round size="small" @click="removeExistingImage">
@@ -178,28 +178,33 @@
 
                 <div v-for="(quiz, index) in course.quizzes" :key="typeof quiz === 'string' ? quiz : quiz._id"
                   class="quiz-item p-4 border rounded-lg mb-3 hover:bg-gray-50">
-                  <span v-if="quiz.draft">Public</span>
-                  <span v-else>Draft</span>
+
+                  <!-- แสดงสถานะ draft -->
+                  <span v-if="typeof quiz !== 'string' && quiz.draft">Public</span>
+                  <span v-else-if="typeof quiz !== 'string'">Draft</span>
                   <el-switch v-model="quiz.draft" class="ml-2"
                     style="--el-switch-on-color: #000; --el-switch-off-color: #ccc"
-                    @change="toggleDraftQuiz(quiz._id)" />
-                  <div class="flex items-start justify-between">
+                    @change="toggleDraftQuiz(typeof quiz === 'string' ? quiz : quiz._id)" />
 
+                  <div class="flex items-start justify-between">
                     <div>
                       <h4 class="font-medium">{{ typeof quiz === 'string' ? '' : quiz.title }}</h4>
-                      <p v-if="typeof quiz !== 'string' && quiz.description" class="text-gray-600 mt-1">{{
-                        quiz.description }}
+                      <p v-if="typeof quiz !== 'string' && quiz.description" class="text-gray-600 mt-1">
+                        {{ quiz.description }}
                       </p>
                       <div v-if="typeof quiz !== 'string'" class="text-sm text-gray-500 mt-2">
                         {{ quiz.questions.length }} question{{ quiz.questions.length !== 1 ? 's' : '' }}
                       </div>
                     </div>
+
                     <div class="quiz-actions flex items-center space-x-2">
-                      <el-button circle size="large" @click="openViewQuizDialog(quiz._id, quiz.title)">
+                      <el-button circle size="large"
+                        @click="openViewQuizDialog(typeof quiz === 'string' ? quiz : quiz._id, typeof quiz === 'string' ? '' : quiz.title)">
                         <el-icon>
                           <View />
                         </el-icon>
                       </el-button>
+
                       <el-dropdown v-if="isTeacher" trigger="click">
                         <el-button size="small" style="border:none;background-color: #fff;" class="ml-2">
                           <i class="material-icons">more_vert</i>
@@ -216,20 +221,10 @@
                           </el-dropdown-menu>
                         </template>
                       </el-dropdown>
-                      <!-- <el-button circle size="large" @click="openQuizDialog(index)">
-                        <el-icon>
-                          <Edit />
-                        </el-icon>
-                      </el-button>
-                      <el-button circle size="large" @click="deleteQuiz(typeof quiz === 'string' ? quiz : quiz._id)">
-                        <el-icon>
-                          <Delete />
-                        </el-icon>
-                      </el-button> -->
                     </div>
                   </div>
-
                 </div>
+
               </div>
             </el-tab-pane>
           </el-tabs>
@@ -435,6 +430,7 @@
 </template>
 
 <script setup lang="ts">
+
 import { ref, onMounted, reactive, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { ElMessageBox } from 'element-plus';
@@ -459,7 +455,10 @@ const courseId = route.params.id as string;
 const isTeacher = computed(() => {
   return authStore.user?.role === 'T';
 });
-const course = ref<Course | null>({
+
+const baseUrl = import.meta.env.VITE_APP_BASE_URL;
+
+const course = ref<any | null>({
   _id: '',
   name: '',
   description: '',
@@ -468,6 +467,8 @@ const course = ref<Course | null>({
   lessons: [],
   quizzes: []
 });
+
+
 
 
 
@@ -509,6 +510,7 @@ const toggleDraftQuiz = async (quizId: any) => {
     console.log(error);
   }
 };
+
 const toggleDraft = async () => {
   try {
     const res = await getIsPublic(courseId)
@@ -531,7 +533,7 @@ const toggleDraft = async () => {
 
 
 const getImageUrl = (image: string) => {
-  return `${$baseUrl}/uploads/${image}`;
+  return `${import.meta.env.VITE_APP_BASE_URL}/uploads/${image}`;
 };
 const lessonRules = ref<FormRules>({
   title: [

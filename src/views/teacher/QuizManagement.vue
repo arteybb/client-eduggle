@@ -36,7 +36,8 @@
           <h3 class="text-xl font-semibold mb-6">Quizzes ({{ course.quizzes.length }})</h3>
 
           <!-- No quizzes state -->
-          <el-empty v-if="course.quizzes.length === 0" description="No quizzes yet. Add your first quiz to get started.">
+          <el-empty v-if="course.quizzes.length === 0"
+            description="No quizzes yet. Add your first quiz to get started.">
             <template #extra>
               <el-button type="primary" @click="openCreateQuizModal">Add First Quiz</el-button>
             </template>
@@ -44,14 +45,12 @@
 
           <!-- Quizzes list -->
           <div v-else class="quizzes-list space-y-3">
-            <div
-              v-for="(quiz, index) in course.quizzes"
-              :key="quiz._id"
-              class="quiz-item border rounded-lg p-4 bg-gray-50 hover:bg-gray-100 transition-colors"
-            >
+            <div v-for="(quiz, index) in course.quizzes" :key="quiz._id"
+              class="quiz-item border rounded-lg p-4 bg-gray-50 hover:bg-gray-100 transition-colors">
               <div class="flex items-center justify-between">
                 <div class="flex items-center">
-                  <div class="quiz-number bg-purple-100 text-purple-800 rounded-full w-8 h-8 flex items-center justify-center mr-3">
+                  <div
+                    class="quiz-number bg-purple-100 text-purple-800 rounded-full w-8 h-8 flex items-center justify-center mr-3">
                     {{ index + 1 }}
                   </div>
                   <div class="quiz-info">
@@ -62,19 +61,11 @@
                   </div>
                 </div>
                 <div class="quiz-actions flex space-x-2">
-                  <el-button
-                    type="primary"
-                    size="small"
-                    @click="editQuiz(quiz)"
-                  >
+                  <el-button type="primary" size="small" @click="editQuiz(quiz)">
                     <i class="material-icons mr-1" style="font-size: 16px;">edit</i>
                     Edit
                   </el-button>
-                  <el-button
-                    type="danger"
-                    size="small"
-                    @click="confirmDeleteQuiz(quiz)"
-                  >
+                  <el-button type="danger" size="small" @click="confirmDeleteQuiz(quiz)">
                     <i class="material-icons mr-1" style="font-size: 16px;">delete</i>
                     Delete
                   </el-button>
@@ -87,12 +78,8 @@
     </div>
 
     <!-- Create/Edit Quiz Modal -->
-    <el-dialog
-      v-model="quizModalVisible"
-      :title="isEditMode ? 'Edit Quiz' : 'Create New Quiz'"
-      width="70%"
-      :before-close="handleCloseModal"
-    >
+    <el-dialog v-model="quizModalVisible" :title="isEditMode ? 'Edit Quiz' : 'Create New Quiz'" width="70%"
+      :before-close="handleCloseModal">
       <p class="text-gray-500 mb-4">Quiz creation and editing will be implemented in a future update.</p>
 
       <template #footer>
@@ -106,11 +93,7 @@
     </el-dialog>
 
     <!-- Delete Confirmation Modal -->
-    <el-dialog
-      v-model="deleteConfirmationVisible"
-      title="Confirm Deletion"
-      width="30%"
-    >
+    <el-dialog v-model="deleteConfirmationVisible" title="Confirm Deletion" width="30%">
       <div class="delete-confirmation-content">
         <p>Are you sure you want to delete this quiz? This action cannot be undone.</p>
       </div>
@@ -146,7 +129,7 @@ const router = useRouter();
 const authStore = useAuthStore();
 const notificationStore = useNotificationStore();
 const courseId = route.params.id as string;
-const course = ref<Course | null>(null);
+const course = ref<any | null>(null);
 const loading = ref(true);
 const submitting = ref(false);
 const quizModalVisible = ref(false);

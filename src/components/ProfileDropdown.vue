@@ -3,7 +3,7 @@
     <div class="profile-menu flex gap-2 items-center" @click="toggleProfile">
       <div class="profile-img">
         <template v-if="props.user?.photoURL || props.user?.photoImg">
-          <img :src="props.user?.photoURL || `${$baseUrl}/uploads/${props.user.photoImg}`" alt="User Profile"
+          <img :src="props.user?.photoURL || `${baseUrl}/uploads/${props.user.photoImg}`" alt="User Profile"
             style="border-radius: 50%; width: 30px; height: 30px;" />
         </template>
         <template v-else>
@@ -74,7 +74,7 @@ defineOptions({
 const props = defineProps<{
   user: IUser | null;
 }>();
-
+const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 const authStore = useAuthStore();
 const isOpen = ref(false);
 const profileMenuRef = ref<HTMLElement | null>(null);

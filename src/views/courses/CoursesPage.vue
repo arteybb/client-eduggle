@@ -30,7 +30,7 @@
       <div class="course-list-area grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-5 gap-8">
         <div class="course-list" v-for="course in filteredCourses" :key="course._id">
           <div class="course-img">
-            <img v-if="course.imageName" :src="`${$baseUrl}/uploads/images/${course.imageName}`" :alt="course.name"
+            <img v-if="course.imageName" :src="`${baseUrl}/uploads/images/${course.imageName}`" :alt="course.name"
               style="width:100%;height:150px;object-fit:cover;" />
             <div v-else style="background-color: #ccc;width:100%;height:150px;"></div>
           </div>
@@ -89,7 +89,7 @@ import { getUserEnrollments } from '@/api/user/course.api';
 import { ElButton, ElTag } from 'element-plus';
 import type { Course } from '@/types/course';
 import FetchingData from '@/components/FetchingData.vue';
-
+const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 const authStore = useAuthStore();
 const isLoading = ref(true);
 

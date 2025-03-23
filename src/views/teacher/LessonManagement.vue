@@ -139,7 +139,7 @@ import {
 } from '@/api/user/teacher.api';
 import { ElDialog, ElForm, ElFormItem, ElInput, ElButton, ElEmpty } from 'element-plus';
 import type { FormInstance, FormRules } from 'element-plus';
-import type { Course, Lesson } from '@/types/course';
+import type { Course } from '@/types/course';
 import draggable from 'vuedraggable';
 import FetchingData from '@/components/FetchingData.vue';
 
@@ -154,7 +154,7 @@ const lessonFormRef = ref<FormInstance>();
 const submitting = ref(false);
 const lessonModalVisible = ref(false);
 const deleteConfirmationVisible = ref(false);
-const selectedLesson = ref<Lesson | null>(null);
+const selectedLesson = ref<any | null>(null);
 const isEditMode = ref(false);
 
 const lessonForm = ref({
@@ -208,7 +208,7 @@ const openCreateLessonModal = () => {
 };
 
 // Edit lesson
-const editLesson = (lesson: Lesson) => {
+const editLesson = (lesson: any) => {
   isEditMode.value = true;
   selectedLesson.value = lesson;
   lessonForm.value = {
@@ -276,7 +276,7 @@ const saveLesson = async () => {
 };
 
 // Confirm delete lesson
-const confirmDeleteLesson = (lesson: Lesson) => {
+const confirmDeleteLesson = (lesson: any) => {
   selectedLesson.value = lesson;
   deleteConfirmationVisible.value = true;
 };

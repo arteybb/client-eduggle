@@ -30,7 +30,7 @@
 
       <!-- Display course details -->
       <div v-else class="course-details p-5 mb-5" ref="courseDetail" :style="{
-        backgroundImage: `url('${$baseUrl}/uploads/images/${course.imageName}')`,
+        backgroundImage: `url('${baseUrl}/uploads/images/${course.imageName}')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
 
@@ -40,7 +40,7 @@
           style="position: fixed;background-color: #fff;width:420px;min-height:60vh;border-radius: 20px;box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;z-index: 99;">
 
           <img style="background-color: #ccc;border-radius:10px;width:100%;height:200px; object-fit: cover;"
-            :src="`${$baseUrl}/uploads/images/${course.imageName}`" alt="">
+            :src="`${baseUrl}/uploads/images/${course.imageName}`" alt="">
 
           <div class="course-info-detail">
 
@@ -239,7 +239,7 @@ import FetchingData from '@/components/FetchingData.vue';
 import { useWindowSize } from '@/use/useWindowSize';
 const authStore = useAuthStore();
 const notificationStore = useNotificationStore();
-const course = ref<Course | null>(null);
+const course = ref<any | null>(null);
 const loading = ref<boolean>(true);
 const route = useRoute();
 const router = useRouter();
@@ -252,12 +252,9 @@ const discussions = ref<Discussion[]>([]);
 const selectedDiscussion = ref<Discussion | null>(null);
 const newDiscussionModalVisible = ref(false);
 const { mobileMode: isMobile } = useWindowSize()
-const newDiscussionForm = ref({
-  title: '',
-  content: ''
-});
-const courseDetail = ref(null);
-const courseInfo = ref(null);
+const baseUrl = import.meta.env.VITE_APP_BASE_URL;
+const courseDetail = ref(<any>null);
+const courseInfo = ref(<any>null);
 
 const updateCourseInfoPosition = () => {
   if (courseDetail.value && courseInfo.value) {
@@ -361,57 +358,8 @@ const fetchDiscussions = async () => {
   }
 };
 
-// Open the new discussion modal
-const openNewDiscussionModal = () => {
-  if (!isEnrolled.value) {
-    notificationStore.showWarning('You need to be enrolled to start a discussion', 'Enrollment Required');
-    return;
-  }
-  newDiscussionForm.value = { title: '', content: '' };
-  newDiscussionModalVisible.value = true;
-};
 
 // Create a new discussion
-const createNewDiscussion = async () => {
-  if (!authStore.user || !authStore.user.uid) {
-    notificationStore.showWarning('Please log in to create a discussion', 'Authentication Required');
-    return;
-  }
-
-  if (!newDiscussionForm.value.title.trim() || !newDiscussionForm.value.content.trim()) {
-    notificationStore.showWarning('Please provide both title and content', 'Validation Error');
-    return;
-  }
-
-  try {
-    const payload: CreateDiscussionPayload = {
-      title: newDiscussionForm.value.title,
-      content: newDiscussionForm.value.content,
-      courseId: courseId,
-      userId: authStore.user.uid
-    };
-
-    await createDiscussion(payload);
-    notificationStore.showSuccess('Discussion created successfully', 'Success');
-    newDiscussionModalVisible.value = false;
-    await fetchDiscussions();
-  } catch (error) {
-    console.error('Error creating discussion:', error);
-    notificationStore.showError('Failed to create discussion', 'Error');
-  }
-};
-
-// Open discussion details
-const openDiscussionDetails = async (discussion: Discussion) => {
-  // Prevent non-enrolled users from opening discussion details
-  if (!isEnrolled.value) {
-    notificationStore.showWarning('You need to be enrolled in this course to view discussions', 'Enrollment Required');
-    return;
-  }
-
-  // Navigate to the discussion detail page
-  router.push(`/courses/${courseId}/discussions/${discussion._id}`);
-};
 
 // เรียกฟังก์ชันเมื่อ component ถูก mounted
 onMounted(async () => {

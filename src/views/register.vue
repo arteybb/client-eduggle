@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watch } from 'vue';
+import { reactive, ref, } from 'vue';
 import { RouterLink, useRouter } from 'vue-router'
 import type { FormInstance, FormRules } from 'element-plus';
 import { useAuthStore } from '@/stores/auth';
@@ -129,8 +129,9 @@ const signUp = async () => {
       showError('Registration failed. Please try again.', 'Registration failed');
     }
 
-  } catch (error) {
+  } catch (error: any) {
     console.log("error", error);
+    if (!error) return
     if (error.code === 'auth/email-already-in-use' ||
       (error.message && error.message.includes('email-already-in-use'))) {
       showError('Email already exists. Please use a different email address.', 'Email already exists');

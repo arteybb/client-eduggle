@@ -352,15 +352,15 @@ onMounted(async () => {
 .notifications {
   background-color: #fff;
   position: absolute;
-  top: 90px;
-  right: 120px;
+  top: 80px;
+  right: 100px;
   height: 280px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   box-sizing: border-box;
   border-radius: 15px;
   overflow-x: auto;
   user-select: none;
-  width: 250px;
+  width: 300px;
 }
 
 .notification:hover {
