@@ -12,6 +12,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'landingPage',
     component: () => import('@/views/index.vue')
   },
+  {
+    path: '/feedback',
+    name: 'feedback',
+    component: () => import('@/views/FeedbackForm.vue')
+  },
   authenticationRoute,
   homeRoute,
   courseRoute,

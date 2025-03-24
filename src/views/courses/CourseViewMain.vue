@@ -34,6 +34,13 @@
               </div>
             </template>
           </el-tab-pane>
+          <el-tab-pane name="member">
+            <template #label>
+              <div class="label-custom">
+                <span>Member</span>
+              </div>
+            </template>
+          </el-tab-pane>
         </el-tabs>
       </div>
       <el-col :span="24" class="booking-content">
@@ -43,7 +50,7 @@
         <CourseDiscussion v-if="state.activeTab === 'discussion'" :course="course" :discussions="discussions"
           :isEnrolled="isEnrolled" :courseId="courseId" @discussion-created="fetchDiscussions"
           @discussions-updated="updateDiscussions" />
-
+        <MemberList :id="courseId" v-if="state.activeTab === 'member'" />
 
       </el-col>
     </div>
@@ -73,6 +80,7 @@ import type { Discussion, CreateDiscussionPayload } from '@/types/discussion';
 import CourseDiscussion from '@/components/courses/CourseDiscussion.vue';
 import AssignmentList from '@/components/courses/AssignmentList.vue';
 import QuizList from '@/components/courses/QuizList.vue';
+import MemberList from '@/components/courses/MemberList.vue';
 
 const authStore = useAuthStore();
 const notificationStore = useNotificationStore();

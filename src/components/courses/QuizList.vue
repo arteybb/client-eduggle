@@ -1,5 +1,6 @@
 <template>
   <div class="quiz-list-container">
+    <h4 class="text-xl font-semibold mt-1 mb-3">Quizzes</h4>
     <!-- Loading state -->
     <FetchingData v-if="loading"></FetchingData>
 
@@ -22,7 +23,9 @@
     </div>
 
     <!-- Quizzes list -->
+
     <div v-else class="quizzes-grid mt-4">
+
       <div v-for="quiz in quizzes" :key="quiz._id" class="quiz-card">
         <el-card shadow="hover" class="h-full" v-if="quiz.draft">
           <div class="quiz-card-content">

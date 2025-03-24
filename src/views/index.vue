@@ -6,8 +6,14 @@
           <span style="color:gray;">.</span>eduggle
         </h1>
       </div>
-      <div v-if="!isLoggedIn" class="nav-login">
-        <li>
+
+      <div v-if="!isLoggedIn" class="flex items-center">
+        <li class=" feed-back-btn " style="font-size:15px;font-weight: bold;">
+          <RouterLink to="/feedback">
+            Feedback
+          </RouterLink>
+        </li>
+        <li class="nav-login">
           <RouterLink to="/login">
             Login
           </RouterLink>
@@ -169,6 +175,10 @@ nav {
     line-height: 90px;
   }
 
+  .feed-back-btn:hover {
+    color: gray;
+  }
+
   li {
     list-style: none;
     display: inline-block;
@@ -235,6 +245,7 @@ nav {
 .signIn-btn {
   z-index: 8;
 }
+
 
 .signIn-btn a {
   display: flex;

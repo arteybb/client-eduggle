@@ -87,3 +87,21 @@ export const checkIfEnrolled = async (userId: string, courseId: string): Promise
   }
 };
 
+export const getMemberCourse = async (courseId: string): Promise<any> => {
+  try {
+    const { data } = await axios.get(`course/${courseId}/enrolled-users`);
+    return data
+  } catch (error) {
+    throw error;
+  }
+}
+export const deleteMemberCourse = async (courseId: string, uid: string): Promise<any> => {
+  try {
+    const { data } = await axios.delete(`enroll/${courseId}/${uid}`);
+    return data
+  } catch (error) {
+    throw error;
+  }
+
+}
+

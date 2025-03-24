@@ -227,6 +227,9 @@
 
               </div>
             </el-tab-pane>
+            <el-tab-pane label="Members">
+              <MemberList :id="courseId"></MemberList>
+            </el-tab-pane>
           </el-tabs>
         </div>
       </div>
@@ -448,6 +451,8 @@ import { useWindowSize } from '@/use/useWindowSize';
 import { getQuizAttemptStatus } from '@/api/user/quiz.api';
 import { getIsPublic } from '@/api/user/course.api';
 import { getIsPublicQuiz } from '@/api/user/quiz.api';
+import MemberList from '@/components/courses/MemberList.vue';
+
 const route = useRoute();
 const router = useRouter();
 const authStore = useAuthStore();
