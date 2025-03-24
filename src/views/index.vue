@@ -31,11 +31,10 @@
     <div class="container">
       <div class="header-inner">
         <div class="header-text">
-          <h2 class="text-center text-5xl font-bold">Working towards your dreams is hard. Not reaching
-            them is
-            harder.</h2>
+          <h2 class="text-center text-5xl font-bold">Where learning meets opportunity</h2>
           <p class="text-center text-xl mt-10 mb-10 ">
-            Get work done with others from around the 🌎
+            Unlock your potential, challenge
+            yourself, and grow with us in a dynamic learning environment
           </p>
 
           <RouterLink v-if="!isLoggedIn" to="/login" class="signIn-link">
