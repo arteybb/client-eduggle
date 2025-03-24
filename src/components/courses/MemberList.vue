@@ -56,6 +56,7 @@ const { mobileMode: isMobile } = useWindowSize()
 const enrolledUsers = ref<any[]>([]);
 const isTeacherCourse = ref()
 const isLoading = ref(false)
+const notificationStore = useNotificationStore()
 const props = defineProps<{
   id: string;
 }>();
@@ -70,6 +71,7 @@ const isValidUrl = (url: string | undefined): boolean => {
   }
 };
 import profileImage from '@/assets/image/profileImage.png';
+import { useNotificationStore } from '@/stores/notification';
 
 
 const isHttpUrl = (url: string): boolean => {
@@ -134,6 +136,7 @@ const handleDelete = async () => {
     console.error('Error deleting enrollment:', error);
   } finally {
     fetchEnrolledUsers();
+    notificationStore.showSuccess('Delete Member successfully', 'Success');
     deleteConfirmationVisible.value = false;
   }
 
