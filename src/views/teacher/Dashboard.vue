@@ -44,8 +44,8 @@
             <template #default="scope">
               <div class="flex items-center">
                 <div class="course-image-small mr-3">
-                  <img v-if="scope.row.imageUrl" :src="scope.row.imageUrl" alt="Course Image"
-                    class="w-12 h-12 object-cover rounded" />
+                  <img v-if="scope.row.imageUrl" :src="`${baseUrl}/uploads/images/${scope.row.imageName}`"
+                    alt="Course Image" class="w-12 h-12 object-cover rounded" />
                   <div v-else class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center">
                     <i class="material-icons text-gray-400">image</i>
                   </div>
@@ -124,7 +124,7 @@ import { getTeacherCourses, deleteCourse } from '@/api/user/teacher.api';
 import { ElButton, ElEmpty, ElTable, ElTableColumn, ElMessageBox } from 'element-plus';
 import type { Course } from '@/types/course';
 import FetchingData from '@/components/FetchingData.vue';
-
+const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 // Define component name
 defineOptions({
   name: 'TeacherDashboard'

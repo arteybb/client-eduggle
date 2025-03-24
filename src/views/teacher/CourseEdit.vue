@@ -83,9 +83,8 @@
                 </div>
 
                 <div v-else class="image-preview">
-                  <img
-                    :src="course.imageUrl || (course.imageName ? `${baseUrl}/uploads/images/${course.imageName}` : '')"
-                    alt="Course image" class="w-full h-48 object-cover rounded-lg" />
+                  <img :src="`${baseUrl}/uploads/images/${course.imageName}`" alt="Course image"
+                    class="w-full h-48 object-cover rounded-lg" />
                   <div class="image-actions mt-4 flex justify-center space-x-2">
                     <el-button round size="small" @click="removeExistingImage">
                       <i class="material-icons mr-1" style="font-size: 16px;">delete</i>
