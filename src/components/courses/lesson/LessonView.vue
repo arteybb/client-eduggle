@@ -10,8 +10,10 @@
         <p v-if="selectedLesson.content" class="mt-2 mb-5">{{ selectedLesson.content }}</p>
         <div class="video-box flex justify-center shadow"
           style="border-radius:20px;padding:30px;width:90%; margin:0 auto">
-          <video controls style="width:100%;height:600px;" v-if="selectedLesson.mediaUrl" :src="selectedLesson.mediaUrl"
-            alt="Lesson Media" class="mt-2 w-full h-auto rounded" />
+
+          <video controls style="width:100%;height:600px;" v-if="selectedLesson.mediaPath"
+            :src="`${baseUrl}/uploads/media/${selectedLesson.mediaPath}`" alt="Lesson Media"
+            class="mt-2 w-full h-auto rounded" />
         </div>
       </div>
       <div class="w-2/3 p-4 text-gray-500" v-else>
@@ -35,16 +37,15 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import axios from 'axios';
 import FetchingData from '@/components/FetchingData.vue';
 import { getLesson } from '@/api/lesson/lesson.api';
-
+const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 interface Lesson {
   _id: string;
   title: string;
   description: string;
   content?: string;
-  mediaUrl?: string;
+  mediaPath?: string;
 }
 
 const route = useRoute();

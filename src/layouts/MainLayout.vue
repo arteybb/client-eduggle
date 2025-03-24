@@ -27,7 +27,7 @@
           </div>
         </RouterLink>
 
-        <div v-if="authStore.user">
+        <div v-if="authStore.user.role === 'M'">
           <RouterLink to="/courses">
             <div class="sidebar-menu-item flex items-center gap-5">
               <div class="sidebar-icon text-xl ml-5 mr-2 pt-2 pb-2">

@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ courseId }}
     <h4 class="text-xl font-semibold mt-6 mb-3">Members</h4>
     <el-table v-loading="isLoading" :data="enrolledUsers" style="width: 100%">
       <el-table-column label="Display Name">
@@ -63,8 +64,8 @@ const fetchEnrolledUsers = async () => {
   try {
     isLoading.value = true
     const response = await getMemberCourse(courseId)
-    isTeacherCourse.value = response.data.teacherId
-    enrolledUsers.value = response.data.enrollment;
+    isTeacherCourse.value = response.teacherId
+    enrolledUsers.value = response.enrollment;
   } catch (error) {
     console.error('Error fetching data:', error);
   } finally {

@@ -7,19 +7,23 @@
         </h1>
       </div>
 
-      <div v-if="!isLoggedIn" class="flex items-center">
-        <li class=" feed-back-btn " style="font-size:15px;font-weight: bold;">
+      <div class="flex items-center">
+        <li class="feed-back-btn" style="font-size:15px; font-weight: bold;">
           <RouterLink to="/feedback">
             Feedback
           </RouterLink>
         </li>
-        <li class="nav-login">
+
+        <!-- If not logged in, show login link -->
+        <li v-if="!isLoggedIn" class="nav-login">
           <RouterLink to="/login">
             Login
           </RouterLink>
         </li>
+
+        <!-- If logged in, show profile dropdown -->
+        <ProfileDropdown v-else :user="user" />
       </div>
-      <ProfileDropdown v-else :user="user" />
     </div>
   </nav>
 
