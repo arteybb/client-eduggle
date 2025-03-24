@@ -1,12 +1,12 @@
 <template>
   <div>
-    {{ courseId }}
     <h4 class="text-xl font-semibold mt-6 mb-3">Members</h4>
     <el-table v-loading="isLoading" :data="enrolledUsers" style="width: 100%">
       <el-table-column label="Display Name">
         <template #default="{ row }">
           <div class="flex gap-3 items-center">
-            <img :src="row.photoURL" alt="photo" style="border-radius: 50%" />
+            <img @error="onImageError" style="border-radius: 50%; width: 25px; height: 25px;"
+              :src="getImageSrc(row.photoURL)" alt="photo" />
             <div>
               {{ row.displayName }}
             </div>
@@ -59,11 +59,51 @@ const isLoading = ref(false)
 const props = defineProps<{
   id: string;
 }>();
+const baseUrl = import.meta.env.VITE_APP_BASE_URL;
+
+const isValidUrl = (url: string | undefined): boolean => {
+  try {
+    new URL(url || '');
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+import profileImage from '@/assets/image/profileImage.png';
+
+
+const isHttpUrl = (url: string): boolean => {
+  return /^https?:\/\//i.test(url);
+};
+const getImageSrc = (photoURL: string | undefined): string => {
+  const validPhotoURL = photoURL || '';
+
+  // If photoURL is a valid HTTP URL, use it directly
+  if (isHttpUrl(validPhotoURL)) {
+    return validPhotoURL;
+  }
+
+  // If photoURL is a relative URL, prepend baseUrl
+  if (validPhotoURL) {
+    return baseUrl + '/uploads/' + validPhotoURL;
+  }
+
+
+  return profileImage;
+};
+
+const onImageError = (event: Event) => {
+  const target = event.target as HTMLImageElement;
+  target.src = profileImage;
+};
+
+
 const courseId = route.params.courseId as string ?? props.id;
 const fetchEnrolledUsers = async () => {
   try {
     isLoading.value = true
     const response = await getMemberCourse(courseId)
+    console.log(response)
     isTeacherCourse.value = response.teacherId
     enrolledUsers.value = response.enrollment;
   } catch (error) {
