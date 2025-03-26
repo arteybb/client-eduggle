@@ -1,45 +1,24 @@
-# client-educraft
+# Eduggle - Learning Management System (LMS)
 
-This template should help get you started developing with Vue 3 in Vite.
+Eduggle is a Learning Management System (LMS) designed to facilitate online education. It provides features for both students and instructors to manage learning activities efficiently. This project is a final-year thesis for a student focusing on developing an easy-to-use website with comprehensive features for managing educational content and communication.
 
-## Recommended IDE Setup
+## Key Features
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- **For Students**:
+  - Register for courses
+  - View lessons
+  - Submit assignments
+  - Take quizzes
+  - Receive notifications for new lessons, quizzes, assignments, and discussion board posts
 
-## Type Support for `.vue` Imports in TS
+- **For Instructors**:
+  - Create and edit courses
+  - Add lessons, assignments, and quizzes
+  - Manage notifications for students
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## Technologies Used
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-yarn
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-yarn dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-yarn build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-yarn test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-yarn lint
-```
+- **Frontend**: Vue.js, Tailwind CSS
+- **Backend**: NestJS
+- **Database**: MongoDB
+- **Authentication**: Firebase Authentication (supports login via email and Google)
