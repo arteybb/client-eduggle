@@ -165,7 +165,7 @@ interface Notification {
 const notifications = ref<Notification[]>([]);
 
 const initWebSocket = () => {
-  const socketUrl = `${import.meta.env.VITE_APP_BASE_URL}/ws`;
+  const socketUrl = `${import.meta.env.VITE_APP_BASE_URL_API}/ws`;
   const socket = io(socketUrl, {
     query: { userId: authStore.user._id },
   });
