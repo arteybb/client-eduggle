@@ -42,7 +42,7 @@ router.beforeEach(async (to, from, next) => {
 
 
 
-
+  document.title = to.meta.title ? `eduggle - ${to.meta.title}` : 'eduggle';
 
   if (!authStore.user && to.meta?.auth) {
     return next('/login');
