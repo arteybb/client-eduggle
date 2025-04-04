@@ -11,6 +11,10 @@ import { RouterView } from 'vue-router'
 
 
 <style>
+* {
+  touch-action: none !important;
+}
+
 .el-button--primary {
   background-color: #000;
   border: none;
