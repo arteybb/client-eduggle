@@ -11,8 +11,10 @@ import { RouterView } from 'vue-router'
 
 
 <style>
-* {
-  touch-action: none !important;
+*,
+html,
+body {
+  touch-action: manipulation;
 }
 
 .el-button--primary {
